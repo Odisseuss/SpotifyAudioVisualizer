@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>test</title>
+    <style>
+      body {
+        padding: 10px 20px;
+        color: #eee;
+        background-color: #333;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+      }
+
+      h1,
+      h2 {
+        margin: 0 0 10px;
+        font-weight: normal;
+      }
+
+      p {
+        font-size: 12px;
+      }
+
+      button {
+        background-color: transparent;
+        color: #52dac2;
+        border: 2px solid #52dac2;
+        border-radius: 10px;
+        padding: 5px 30px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        color: #60ffe3;
+        border-color: #60ffe3;
+      }
+
+      .button_container {
+        padding: 30px 0px;
+      }
+
+      input[type="text"] {
+        padding: 5px 10px;
+      }
+
+      input[type="text"]:focus {
+        outline-color: #52dac2;
+        outline-style: solid;
+        outline-width: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>electron-wallpaper example</h1>
+    <div class="button_container">
+      <button id="attachButton">Attach dashboard</button>
+      <button id="killButton">Kill dashboard</button>
+      <p id="attachMessage"></p>
+    </div>
+
+    <script>
+      (function () {
+        const electronWallpaper = require("electron-wallpaper-napi");
+        const { closeDashboard, initDashboard } = require("./renderer.js");
+        const attachButton = document.getElementById("attachButton");
+        const killButton = document.getElementById("killButton");
+        const attachMessage = document.getElementById("attachMessage");
+
+        let dashboardWindow;
+
+        attachButton.onclick = () => {
+          dashboardWindow = initDashboard(
+            dashboardWindow,
+            electronWallpaper,
+            attachMessage
+          );
+        };
+        killButton.onclick = () => {
+          dashboardWindow = closeDashboard(dashboardWindow);
+        };
+
+        // Close the dashboard when closing this window,
+        // otherwise people trying the example will have the dashboard
+        // stuck on their desktop
+        window.onbeforeunload = () => closeDashboard(dashboardWindow);
+      })();
+    </script>
+  </body>
+</html>

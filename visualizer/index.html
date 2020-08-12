@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+Audiovisualization using the html canvas element.
+©2017, Dominik Hofacker
+https://www.behance.net/dominikhofacker
+Please consider supporting this project on behance:
+https://www.behance.net/gallery/49260123/Web-Audio-Visualization
+-->
+    <head>
+        <meta charset="utf-8">
+        <meta content='IE=8' http-equiv='X-UA-Compatible'>
+        <title>player</title>
+        <meta name="viewport" content="width=device-width">
+        <!-- Das favicon.ico und das apple-touch-icon.png in das root Verzeichnis -->
+        <link rel="stylesheet" href="css/style.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css' />
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+        <script src="src/bufferloader.js"></script>
+        <script src="src/id3-minimized.js"></script>
+        <script src="src/audiovisualisierung.js"></script>
+      </head>
+      <body>		   
+        <input type="file" id="input" onchange="handleFiles(this.files)"/>
+        <button id="playSampleButton" type="button" onClick="playSample()">Play Sample File</button>
+        <button id="useMicButton" type="button" >Use Microphone</button>
+        <span id="loading"></span>
+        <div id="song_info_wrapper">
+          <div id="artist">Unknown Artist</div>
+          <div id="title">Unknown Titel</div>
+          <div id="album">Unknown Album</div>
+        </div>
+        <canvas id="freq" width="1024" height="525"></canvas>
+        <script>
+           const playbtn = document.getElementById('playSampleButton');  
+          //  playbtn.onclick = useWindowAudio
+           setTimeout(() => {
+               console.log("IN SET TIMEOUT")
+               playbtn.click();
+              }, 2000);
+            </script>
+              <!-- <script src="https://sdk.scdn.co/spotify-player.js"></script>
+              <script>
+                window.onSpotifyWebPlaybackSDKReady = () => {
+                  const token =
+                    "BQCXtJCvtOKuvtVceWmS5ZwV8Al4KeyYp5TwOu79voMTyGLHcB9YeZNxFHUl8QVsC_zSjvpe8OW-Jd2TO6DXDYp0NRwwPjiagqbiqTwVBOKeyDVVLj9C_KE-WLA2FW7mNjrV6-ZUAV6pVDQP--5glFJvsefCUSByft9ODu0j0ubzOVjYIR8";
+                  const player = new Spotify.Player({
+                    name: "Web Playback SDK Quick Start Player",
+                    getOAuthToken: (cb) => {
+                      cb(token);
+                    },
+                  });
+          
+                  // Error handling
+                  player.addListener("initialization_error", ({ message }) => {
+                    console.error(message);
+                  });
+                  player.addListener("authentication_error", ({ message }) => {
+                    console.error(message);
+                  });
+                  player.addListener("account_error", ({ message }) => {
+                    console.error(message);
+                  });
+                  player.addListener("playback_error", ({ message }) => {
+                    console.error(message);
+                  });
+          
+                  // Playback status updates
+                  player.addListener("player_state_changed", (state) => {
+                    console.log(state);
+                  });
+          
+                  // Ready
+                  player.addListener("ready", ({ device_id }) => {
+                    console.log("Ready with Device ID", device_id);
+                  });
+          
+                  // Not Ready
+                  player.addListener("not_ready", ({ device_id }) => {
+                    console.log("Device ID has gone offline", device_id);
+                  });
+          
+                  // Connect to the player!
+                  player.connect();
+                };
+              </script> -->
+        
+      </body>
+      </html>
